@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
     </ion-toolbar>
@@ -16,5 +16,20 @@
   <div id="container">
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  </div> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngFor="let category of categories" detail>
+          <ion-thumbnail slot="start">
+            <ion-img [src]="category?.imagePath"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{category?.name}}</h2>
+            <p>{{category?.description}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
