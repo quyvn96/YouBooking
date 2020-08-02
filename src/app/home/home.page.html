@@ -19,14 +19,11 @@
   </div> -->
   <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-item *ngFor="let category of categories" detail>
-          <ion-thumbnail slot="start">
-            <ion-img [src]="category?.imagePath"></ion-img>
-          </ion-thumbnail>
+      <ion-col *ngFor="let category of categories" [size]="6">
+        <ion-item [routerLink]="['/','tabs','home',category?.id]">
+          <ion-icon [name]="category?.icon"></ion-icon>
           <ion-label>
             <h2>{{category?.name}}</h2>
-            <p>{{category?.description}}</p>
           </ion-label>
         </ion-item>
       </ion-col>
