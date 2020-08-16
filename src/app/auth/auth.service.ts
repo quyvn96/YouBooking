@@ -21,7 +21,7 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService implements OnDestroy {
-   _user = new BehaviorSubject<User>(null);
+  _user = new BehaviorSubject<User>(null);
   private activeLogoutTimer: any;
 
   get userIsAuthenticate() {
@@ -51,12 +51,12 @@ export class AuthService implements OnDestroy {
       }
     }));
   }
-  get access_token(){
-    let access_token;
+  get fetchedToken() {
+    let fetchedToken: string;
     this.token.subscribe(token => {
-       access_token = token;
+      fetchedToken = token;
     });
-    return access_token;
+    return fetchedToken;
   }
   constructor(private http: HttpClient) { }
   ngOnDestroy() {
@@ -126,7 +126,7 @@ export class AuthService implements OnDestroy {
   }
   private setUserData(userData: AuthResponseData) {
     const expirationTime = new Date(new Date().getTime() + +userData.expiresIn * 1000);
-    const user = new User(userData.localId, userData.email, userData.idToken, expirationTime,SystemConstant.UserRole.customer);
+    const user = new User(userData.localId, userData.email, userData.idToken, expirationTime, SystemConstant.UserRole.customer);
     this._user.next(user);
     this.autoLogout(user.tokenDuration);
     this.storeAuthData(userData.localId, userData.idToken, expirationTime.toISOString(), userData.email, user.userRole);

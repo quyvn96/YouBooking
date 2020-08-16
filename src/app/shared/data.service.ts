@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../auth/auth.service';
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
-    constructor(private http: HttpClient
-        , private authService: AuthService) {
+    constructor(private http: HttpClient, private authService: AuthService) {
     }
 
     // api get method
@@ -34,6 +33,13 @@ export class DataService {
         }
         return this.http.delete(uri + "/?" + paramStr).pipe(map(this.extractData));
 
+    }
+    //upload image
+    uploadImage(image: File) {
+        const uploadData = new FormData();
+        uploadData.append('image', image);
+        return this.http.post<{ imageUrl: string, imagePath: string }>('https://us-central1-you-booking.cloudfunctions.net/storeImage', uploadData,
+            { headers: { Authorization: 'Bearer ' + this.authService.fetchedToken } });
     }
     // api post file method
     // postFile(uri: string, data?: any) {

@@ -18,15 +18,36 @@ const routes: Routes = [
           {
             path: ':categoryId',
             loadChildren: () => import('../home/categories/categories.module').then(m => m.CategoriesPageModule)
+          },
+          {
+            path: ':categoryId/:placeId',
+            loadChildren: () => import('../home/categories/place-detail/place-detail.module').then(m => m.PlaceDetailPageModule)
           }
         ]
       },
       {
-        path: 'account',
+        path: 'offers',
         children: [
           {
             path: '',
-            loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+            loadChildren: () => import('../offers/offers.module').then(m => m.OffersPageModule)
+          },
+          {
+            path: 'new',
+            loadChildren: () => import('../offers/new-offer/new-offer.module').then(m => m.NewOfferPageModule)
+          },
+          {
+            path: 'edit/:placeId',
+            loadChildren: () => import('../offers/edit-offer/edit-offer.module').then(m => m.EditOfferPageModule)
+          }
+        ]
+      },
+      {
+        path: 'bookings',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../bookings/bookings.module').then(m => m.BookingsPageModule)
           }
         ]
       },
